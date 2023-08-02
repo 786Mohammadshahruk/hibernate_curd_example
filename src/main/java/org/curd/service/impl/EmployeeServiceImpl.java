@@ -10,9 +10,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void createEmployee(Employee employee) {
-
         if (employee != null && employee.getDoj() != null) {
             employeeDao.addEmployee(employee);
+        } else {
+            return;
         }
 
     }
@@ -24,8 +25,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployeeById(int employeeId, Double newSal) {
-        employeeDao.updateEmployeeById(employeeId, newSal);
-
+        if (employeeId > 0 && newSal > 0) {
+            employeeDao.updateEmployeeById(employeeId, newSal);
+        } else {
+            return;
+        }
     }
 
     @Override

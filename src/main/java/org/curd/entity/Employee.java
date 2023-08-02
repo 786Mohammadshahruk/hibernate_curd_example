@@ -2,6 +2,7 @@ package org.curd.entity;
 
 
 import jakarta.persistence.*;
+import org.curd.model.Address;
 
 @Entity
 @Table(name = "employee_db")
@@ -21,6 +22,40 @@ public class Employee {
     private String doj;
     @Column(name = "salary")
     private Double salary;
+
+    @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(column = @Column(name = "home_street_name"), name = "street"),
+            @AttributeOverride(column = @Column(name = "home_city_name"), name = "city"),
+            @AttributeOverride(column = @Column(name = "home_state_name"), name = "state"),
+            @AttributeOverride(column = @Column(name = "home_pin_code"), name = "pinCode")
+    })
+    private Address homeAddress;
+
+    @Embedded
+    @AttributeOverrides(value = {
+            @AttributeOverride(column = @Column(name = "office_street_name"), name = "street"),
+            @AttributeOverride(column = @Column(name = "office_city_name"), name = "city"),
+            @AttributeOverride(column = @Column(name = "office_state_name"), name = "state"),
+            @AttributeOverride(column = @Column(name = "office_pin_code"), name = "pinCode")
+    })
+    private Address officeAddress;
+
+    public Address getOfficeAddress() {
+        return officeAddress;
+    }
+
+    public void setOfficeAddress(Address officeAddress) {
+        this.officeAddress = officeAddress;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
 
     public Integer getEmpId() {
         return empId;

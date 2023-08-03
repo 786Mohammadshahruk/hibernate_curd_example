@@ -13,6 +13,8 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
-        <mapping class="org.curd.entity.Employee"/>
+        <!--<mapping class="org.curd.entity.Employee"/>-->
+        <mapping class="OneToOne.entity.Employee"/>
+        <mapping class="OneToOne.entity.Address"/>
     </session-factory>
 </hibernate-configuration>

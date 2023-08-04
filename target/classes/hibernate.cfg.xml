@@ -9,12 +9,12 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root12345</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
         <!--<mapping class="org.curd.entity.Employee"/>-->
-        <mapping class="OneToOne.entity.Employee"/>
-        <mapping class="OneToOne.entity.Address"/>
+        <mapping class="ManyToMany.entity.Employee"/>
+        <mapping class="ManyToMany.entity.Address"/>
     </session-factory>
 </hibernate-configuration>

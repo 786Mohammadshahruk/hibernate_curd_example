@@ -14,7 +14,8 @@
         <property name="hibernate.format_sql">true</property>
 
         <!--<mapping class="org.curd.entity.Employee"/>-->
-        <mapping class="ManyToMany.entity.Employee"/>
-        <mapping class="ManyToMany.entity.Address"/>
+        <!--<mapping class="ManyToMany.entity.Employee"/>
+        <mapping class="ManyToMany.entity.Address"/>-->
+        <mapping class="HQL.entity.Employee"/>
     </session-factory>
 </hibernate-configuration>

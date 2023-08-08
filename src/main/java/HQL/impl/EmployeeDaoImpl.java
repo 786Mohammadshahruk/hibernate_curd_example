@@ -81,4 +81,62 @@ public class EmployeeDaoImpl {
             exception.printStackTrace();
         }
     }
+
+    public void insertEmployeeRecord() {
+        try (Session session = HibernateUtil.getSession()) {
+            String INSERT_HQL = "INSERT INTO Employee(employeeFirstName,employeeLastName,email,doj,salary,designation)";
+            String SELECT_HQL = "SELECT employeeFirstName,employeeLastName,email,doj,salary,designation from EmployeeBackup";
+
+            String HQL = INSERT_HQL + SELECT_HQL;
+
+            Query query = session.createQuery(HQL);
+            Transaction transaction = session.beginTransaction();
+            int executeUpdate = query.executeUpdate();
+            if (executeUpdate > 0) {
+                System.out.println("Record Inserted");
+            }
+            transaction.commit();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
+    public void updateEmployeeEmailById(int id) {
+
+        try (Session session = HibernateUtil.getSession()) {
+
+            String HQL = "Update Employee set email=:newEmail where empId=:empId";
+            Query query = session.createQuery(HQL);
+            query.setParameter("newEmail", "xyz@gmail.com");
+            query.setParameter("empId", id);
+            Transaction transaction = session.beginTransaction();
+            int executedValue = query.executeUpdate();
+            transaction.commit();
+            if (executedValue > 0) {
+                System.out.println("Record Updated");
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void deleteEmployeeById(int id) {
+
+        try (Session session = HibernateUtil.getSession()) {
+
+            String HQL = "Delete From Employee where empId=:employeeId";
+            Query query = session.createQuery(HQL);
+            query.setParameter("employeeId",id);
+            Transaction transaction = session.beginTransaction();
+            if(query.executeUpdate()>0){
+                transaction.commit();
+                System.out.println("Employee Is Deleted");
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
 }

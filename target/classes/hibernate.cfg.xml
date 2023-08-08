@@ -16,6 +16,9 @@
         <!--<mapping class="org.curd.entity.Employee"/>-->
         <!--<mapping class="ManyToMany.entity.Employee"/>
         <mapping class="ManyToMany.entity.Address"/>-->
-        <mapping class="HQL.entity.Employee"/>
+        <!--<mapping class="HQL.entity.Employee"/>
+        <mapping class="HQL.entity.EmployeeBackup"/>-->
+        <mapping class="HQL_JOINS.entity.Employee"/>
+        <mapping class="HQL_JOINS.entity.Address"/>
     </session-factory>
 </hibernate-configuration>

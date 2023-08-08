@@ -12,7 +12,22 @@ public class HQLClientTest {
         //getEmployeeId(employeeDao);
         //getEmployees(employeeDao);
         //getEmployeeByIdAndEmail(employeeDao);
-        getAllEmployeeIdAndName(employeeDao);
+        //getAllEmployeeIdAndName(employeeDao);
+        //insertEmployeeRecord(employeeDao);
+        //updateEmployeeEmailById(employeeDao,1);
+        deleteEmployeeById(employeeDao, 1);
+    }
+
+    private static void deleteEmployeeById(EmployeeDaoImpl employeeDao, int id) {
+        employeeDao.deleteEmployeeById(id);
+    }
+
+    private static void updateEmployeeEmailById(EmployeeDaoImpl employeeDao, int id) {
+        employeeDao.updateEmployeeEmailById(id);
+    }
+
+    private static void insertEmployeeRecord(EmployeeDaoImpl employeeDao) {
+        employeeDao.insertEmployeeRecord();
     }
 
     private static void getEmployeeId(EmployeeDaoImpl employeeDao) {

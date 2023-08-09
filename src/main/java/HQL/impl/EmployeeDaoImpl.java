@@ -139,4 +139,23 @@ public class EmployeeDaoImpl {
             exception.printStackTrace();
         }
     }
+
+    public void performOperationWithAggregateFunctionUsingHQL() {
+
+        try(Session session = HibernateUtil.getSession()) {
+            String HQL = "SELECT COUNT(e),AVG(e.salary),Min(e.salary),max(e.salary),sum(e.salary) from Employee e";
+            Query<Object[]> query = session.createQuery(HQL,Object[].class);
+            List<Object[]> list = query.list();
+            list.stream().forEach(i->{
+                System.out.println("Total Number of Employees : "+ i[0]);
+                System.out.println("Avg salary of the Employees : "+ i[1]);
+                System.out.println("Min salary of the Employees : "+ i[2]);
+                System.out.println("max salary of the Employees : "+ i[3]);
+                System.out.println("Sum of Employees salary  : "+ i[4]);
+            });
+        }catch (Exception exception){
+            exception.printStackTrace();
+
+        }
+    }
 }

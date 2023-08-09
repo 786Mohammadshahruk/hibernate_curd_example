@@ -15,7 +15,13 @@ public class HQLClientTest {
         //getAllEmployeeIdAndName(employeeDao);
         //insertEmployeeRecord(employeeDao);
         //updateEmployeeEmailById(employeeDao,1);
-        deleteEmployeeById(employeeDao, 1);
+        //deleteEmployeeById(employeeDao, 1);
+
+        performOperationWithAggregateFunctionUsingHQL(employeeDao);
+    }
+
+    private static void performOperationWithAggregateFunctionUsingHQL(EmployeeDaoImpl employeeDao) {
+        employeeDao.performOperationWithAggregateFunctionUsingHQL();
     }
 
     private static void deleteEmployeeById(EmployeeDaoImpl employeeDao, int id) {

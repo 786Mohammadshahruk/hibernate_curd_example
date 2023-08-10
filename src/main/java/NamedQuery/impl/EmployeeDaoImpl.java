@@ -5,7 +5,6 @@ import NamedQuery.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.query.Query;
@@ -26,18 +25,6 @@ public class EmployeeDaoImpl {
         }
     }
 
-    public void getEmployeeById() {
-        try (Session session = HibernateUtil.getSession()) {
-            Query<Employee> query = session.createNamedQuery("findEmployee");
-            query.setParameter("emp_id", 2);
-            Employee employee = query.uniqueResult();
-            System.out.println(employee);
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
-
     public void getTotalSalaryOfEmployeeByDept() {
         try (Session session = HibernateUtil.getSession()) {
             Query<Object[]> query = session.createNamedQuery("getTotalSalaryOfEmployeeByDept", Object[].class);
@@ -53,6 +40,30 @@ public class EmployeeDaoImpl {
             System.out.println("Department Name : " + i[0]);
             System.out.println("Salary : " + i[1]);
             System.out.println("Employee name : " + i[2]);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void getEmployeeById() {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<Employee> query = session.createNamedQuery("findEmployee");
+            query.setParameter("emp_id", 2);
+            Employee employee = query.uniqueResult();
+            System.out.println(employee);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void getEmployeeUsingNativeQueryById() {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<Employee> query = session.createNamedQuery("findEmployeeWithNativeQuery");
+            query.setParameter("emp_id", 2);
+            Employee employee = query.uniqueResult();
+            System.out.println(employee);
 
         } catch (Exception exception) {
             exception.printStackTrace();

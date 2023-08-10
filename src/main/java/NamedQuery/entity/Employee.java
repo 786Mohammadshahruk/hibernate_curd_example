@@ -10,13 +10,16 @@ import jakarta.persistence.*;
         @NamedQuery(name = "findEmployee",
                 query = "From Employee where empId=:emp_id"),
         @NamedQuery(name = "getTotalSalaryOfEmployeeByDept",
-                query = "Select dept.departmentName,emp.salary, emp.employeeFirstName from Department dept "+
+                query = "Select dept.departmentName,emp.salary, emp.employeeFirstName from Department dept " +
                         "LEFT JOIN dept.employee emp where dept.departmentId=:department_id"
-        ),
+        )
 
 })
 
 
+@NamedNativeQueries(value = {
+        @NamedNativeQuery(name = "findEmployeeWithNativeQuery", query = "Select * From employee_db where emp_Id=:emp_id", resultClass = Employee.class)
+})
 public class Employee {
 
     @Id

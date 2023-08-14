@@ -20,8 +20,9 @@
         <!--<mapping class="HQL.entity.EmployeeBackup"/>
         <mapping class="HQL_JOINS.entity.Employee"/>
         <mapping class="HQL_JOINS.entity.Address"/>-->
-        <mapping class="NamedQuery.entity.Employee"/>
+        <!--<mapping class="NamedQuery.entity.Employee"/>
         <mapping class="NamedQuery.entity.Department"/>
-        <mapping class="NamedQuery.entity.Person"/>
+        <mapping class="NamedQuery.entity.Person"/>-->
+        <mapping class="Cretria.entity.Employee"/>
     </session-factory>
 </hibernate-configuration>

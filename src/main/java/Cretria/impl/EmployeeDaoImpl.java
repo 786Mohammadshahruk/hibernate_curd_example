@@ -18,17 +18,13 @@ public class EmployeeDaoImpl {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSession()) {
             transaction = session.beginTransaction();
-
-            session.save(listOfEmployee.get(1));
-
-
+            listOfEmployee.stream().forEach(i -> session.save(i));
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
     public void getEmployee() {
-
         try (Session session = HibernateUtil.getSession()) {
             //Creating CriteriaBuilder Object
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -39,7 +35,14 @@ public class EmployeeDaoImpl {
             Query<Employee> query = session.createQuery(criteriaQuery);
             List<Employee> list = query.list();
 
-            list.stream().forEach(System.out::println);
+            Employee employee = list.get(0);
+
+            Double salary = employee.getSalary();
+            Double salary_10 = salary * 10 / 100;
+            Double finalSalary = salary + salary_10;
+
+            list.stream().filter(
+                    i -> i.getSalary().equals(finalSalary)).forEach(System.out::println);
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -84,14 +87,61 @@ public class EmployeeDaoImpl {
             criteriaQuery.multiselect(employeeFirstName, email, salary);
             List<Employee> list = session.createQuery(criteriaQuery).list();
 
-           for (Employee objects : list){
-               System.out.println("Employee Name : "+objects.getEmployeeFirstName());
-               System.out.println("Employee Email : "+objects.getEmail());
-               System.out.println("Employee Salary : "+objects.getSalary());
-               System.out.println("------------------------------------------");
-           }
+            for (Employee objects : list) {
+                System.out.println("Employee Name : " + objects.getEmployeeFirstName());
+                System.out.println("Employee Email : " + objects.getEmail());
+                System.out.println("Employee Salary : " + objects.getSalary());
+                System.out.println("------------------------------------------");
+            }
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
+
+    public void getTotalNumberOfEmployee() {
+        try (Session session = HibernateUtil.getSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+
+            CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+
+            Root<Employee> root = criteriaQuery.from(Employee.class);
+
+            criteriaQuery.select(criteriaBuilder.count(root));
+
+            Long result = session.createQuery(criteriaQuery).getSingleResult();
+            System.out.println("Total No of Employee : " + result);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
+    public void getMaxSalaryOfEmployee() {
+        // Select max(salary) from Employee;
+        try (Session session = HibernateUtil.getSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Double> criteriaQuery = criteriaBuilder.createQuery(Double.class);
+            Root<Employee> root = criteriaQuery.from(Employee.class);
+            criteriaQuery.select(criteriaBuilder.max(root.get("salary")));
+            Double result = session.createQuery(criteriaQuery).getSingleResult();
+            System.out.println("Max Salary of Employee : " + result);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void getAverageSalary() {
+        try (Session session = HibernateUtil.getSession()) {
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Double> criteriaQuery = criteriaBuilder.createQuery(Double.class);
+            Root<Employee> root = criteriaQuery.from(Employee.class);
+            criteriaQuery.select(criteriaBuilder.avg(root.get("salary")));
+            Double result = session.createQuery(criteriaQuery).getSingleResult();
+            System.out.println("Avg Salary of Employee : " + result);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+
 }

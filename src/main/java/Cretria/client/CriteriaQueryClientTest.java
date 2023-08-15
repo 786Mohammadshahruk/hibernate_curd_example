@@ -7,9 +7,12 @@ public class CriteriaQueryClientTest {
 
     public static void main(String[] args) {
         EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
-        //getEmployee(employeeDao);
+        getEmployee(employeeDao);
         //getEmployeeBasedOnId(employeeDao);
-        getEmpNameEmailSalary(employeeDao);
+        //getEmpNameEmailSalary(employeeDao);
+        //getTotalNumberOfEmployee(employeeDao);
+        //getMAxSalaryOfEmployee(employeeDao);
+        //getAvgSalaryOfEmployee(employeeDao);
     }
 
     private static void getEmployee(EmployeeDaoImpl employeeDao) {
@@ -24,4 +27,20 @@ public class CriteriaQueryClientTest {
         employeeDao.getEmpNameEmailSalary();
 
     }
+
+    private static void getTotalNumberOfEmployee(EmployeeDaoImpl employeeDao) {
+        employeeDao.getTotalNumberOfEmployee();
+
+    }
+
+    private static void getMAxSalaryOfEmployee(EmployeeDaoImpl employeeDao) {
+        employeeDao.getMaxSalaryOfEmployee();
+
+    }
+
+    private static void getAvgSalaryOfEmployee(EmployeeDaoImpl employeeDao) {
+        employeeDao.getAverageSalary();
+    }
+
+
 }
